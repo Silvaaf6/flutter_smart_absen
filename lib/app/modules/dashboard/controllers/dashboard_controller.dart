@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:smart_absen/app/modules/dashboard/views/index_view.dart';
+import 'package:smart_absen/app/modules/dashboard/views/kehadiran_view.dart';
 import 'package:smart_absen/app/modules/dashboard/views/profile_view.dart';
 // import 'package:smart_absen/app/modules/dashboard/views/kehadiran_view.dart';
 import 'package:smart_absen/app/modules/dashboard/views/jabatan_view.dart';
@@ -14,7 +15,7 @@ class DashboardController extends GetxController {
 
   final List<Widget> pages = [
     IndexView(),
-    // KehadiranView(),
+    KehadiranView(),
     JabatanView(),
     ProfileView(),
   ];

@@ -9,7 +9,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     LoginController controller = Get.put(LoginController());
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 250, 154, 234),
+      backgroundColor: Color.fromARGB(255, 165, 217, 238),
       body: Center(
         child: Container(
           width: 350,

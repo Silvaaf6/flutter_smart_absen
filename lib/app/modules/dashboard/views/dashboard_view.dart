@@ -29,28 +29,32 @@ class DashboardView extends GetView<DashboardController> {
                   ),
                 );
           },
+          selectedItemColor: Colors.blue, // warna ikon dan label saat dipilih
+          unselectedItemColor:
+              Colors.grey, // warna ikon dan label saat tidak dipilih
+          backgroundColor: Colors.white, // warna latar belakang bottom bar
+          type: BottomNavigationBarType
+              .fixed, // diperlukan jika lebih dari 3 item
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Index',
             ),
-
-            // BottomNavigationBarItem(
-            //   icon: Icon(Icons.home),
-            //   label: 'Kehadiran',
-            // ),
-
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.history),
+              label: 'Riwayat',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.work),
               label: 'Jabatan',
             ),
-            
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',
             ),
           ],
         ),
+
       ),
     );
   }
