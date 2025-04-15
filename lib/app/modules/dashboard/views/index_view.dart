@@ -8,173 +8,189 @@ class IndexView extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Absensi'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Tombol Check In
-            ZoomTapAnimation(
-              onTap: () {
-                Get.snackbar("Check In", "Berhasil Check In");
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                child: const Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.login, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text(
-                        "Check In",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: ZoomTapAnimation(
-                    onTap: () {
-                      _showSakitForm(context);
-                    },
-
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: const Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.sick, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              "Sakit",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: ZoomTapAnimation(
-                    onTap: () {
-                      _showCutiForm(context);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: const Center(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.edit_calendar, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              "Pengajuan Cuti",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            _buildSliderSection(),
+            const SizedBox(height: 24),
+            _buildActionButtons(context),
           ],
         ),
       ),
     );
   }
-}
 
-void _showSakitForm(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) {
-      TextEditingController alasanController = TextEditingController();
-      return AlertDialog(
-        title: const Text('Form Sakit'),
-        content: TextField(
-          controller: alasanController,
-          decoration: const InputDecoration(
-            labelText: 'Alasan Sakit',
+  Widget _buildSliderSection() {
+    return Container(
+      height: 250,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color.fromARGB(255, 182, 193, 255), Colors.blue],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: PageView(
+        children: [
+          _buildSliderItem('Welcome to Absensi', 'assets/images/image1.jpg'),
+          _buildSliderItem('Stay Healthy', 'assets/images/image2.jpg'),
+          _buildSliderItem('Track Your Attendance', 'assets/images/image3.jpg'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSliderItem(String title, String imagePath) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 4.0,
+                color: Colors.black38,
+              ),
+            ],
           ),
         ),
-        actions: [
-          // TextButton(
-          //   onPressed: () => Navigator.pop(context),
-          //   child: const Text('Batal'),
-          // ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Get.snackbar("Sakit", "Alasan: ${alasanController.text}");
-            },
-            child: const Text('Kirim'),
-          ),
-        ],
-      );
-    },
-  );
-}
+      ),
+    );
+  }
 
-void _showCutiForm(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) {
-      TextEditingController alasanController = TextEditingController();
-      return AlertDialog(
-        title: const Text('Form Pengajuan Cuti'),
-        content: TextField(
-          controller: alasanController,
-          decoration: const InputDecoration(
-            labelText: 'Alasan Cuti',
+  Widget _buildActionButtons(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildActionButton(
+              context,
+              title: "Check In",
+              icon: Icons.login,
+              color: Colors.green,
+              onTap: () {
+                Get.snackbar("Check In", "Berhasil Check In");
+              },
+            ),
+            const SizedBox(width: 16),
+            _buildActionButton(
+              context,
+              title: "Sakit",
+              icon: Icons.sick,
+              color: Colors.orange,
+              onTap: () {
+                _showSakitForm(context);
+              },
+            ),
+            const SizedBox(width: 16),
+            _buildActionButton(
+              context,
+              title: "Check Out",
+              icon: Icons.logout,
+              color: Colors.red,
+              onTap: () {
+                Get.snackbar("Check Out", "Berhasil Check Out");
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButton(
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: ZoomTapAnimation(
+        onTap: onTap,
+        child: Material(
+          borderRadius: BorderRadius.circular(12),
+          elevation: 5,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: color.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        actions: [
-          // TextButton(
-          //   onPressed: () => Navigator.pop(context),
-          //   child: const Text('Batal'),
-          // ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Get.snackbar("Cuti", "Alasan: ${alasanController.text}");
-            },
-            child: const Text('Ajukan'),
-          ),
-        ],
-      );
-    },
-  );
-}
+      ),
+    );
+  }
 
+  void _showSakitForm(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        TextEditingController alasanController = TextEditingController();
+        return AlertDialog(
+          title: const Text('Form Sakit', style: TextStyle(fontWeight: FontWeight.bold)),
+          content: TextField(
+            controller: alasanController,
+            decoration: const InputDecoration(
+              labelText: 'Alasan Sakit',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Get.snackbar("Sakit", "Alasan: ${alasanController.text}");
+              },
+              child: const Text('Kirim'),
+              style: ElevatedButton.styleFrom(
+                // primary: Colors.green,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

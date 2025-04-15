@@ -10,7 +10,7 @@ class JabatanController extends GetxController {
   var jabatanList = <Data>[].obs;
 
   // TODO: Ganti token ini sesuai dengan yang kamu miliki
-  final String token = '494|kVhdEdgvxFScj5y87MAJubf0mbD5SDTnTpO7hoeT48b931a8';
+  final String token = '537|vH3SB24MXsVvNgK5JxtoYS3ROBsCO8Ig89ZvVypz653d72ed';
 
   @override
   void onInit() {

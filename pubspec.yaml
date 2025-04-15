@@ -67,6 +67,9 @@ flutter:
   assets:
     - assets/lottie/time.json
     - assets/images/login.jpg
+    - assets/images/image1.jpg
+    - assets/images/image2.jpg
+    - assets/images/image3.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
