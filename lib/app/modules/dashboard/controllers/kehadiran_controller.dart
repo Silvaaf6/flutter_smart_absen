@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:smart_absen/app/data/kehadiran_response.dart'; // Pastikan model KehadiranResponse sesuai
+import 'package:smart_absen/app/data/kehadiran_response.dart'; 
 class KehadiranController extends GetxController {
   var isLoading = true.obs;
-  var kehadiranList = <Data>[].obs; // Data yang akan menampung list Data
+  var kehadiranList = <Data>[].obs; 
   
 
   @override
   void onInit() {
-    fetchKehadiran(); // Memanggil fungsi untuk fetch data kehadiran
+    fetchKehadiran(); 
     super.onInit();
   }
 
@@ -21,11 +21,12 @@ class KehadiranController extends GetxController {
         Uri.parse('http://127.0.0.1:8000/api/kehadiran'),
         headers: {
           "Accept": "application/json",
+          'Content-Type': 'application/json',
           "Authorization":
-              "Bearer 537|vH3SB24MXsVvNgK5JxtoYS3ROBsCO8Ig89ZvVypz653d72ed",
+              "Bearer 1|50ZUfaSdhuPbU1nHW8FPdKSjkIxV2NknN92PfMSk95e4acb8",
         },
       );
-
+      print(response.body); 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         var parsed = KehadiranResponse.fromJson(jsonData);

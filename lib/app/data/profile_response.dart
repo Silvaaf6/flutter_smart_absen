@@ -4,7 +4,7 @@ class ProfileResponse {
   String? email;
   Null? emailVerifiedAt;
   String? nip;
-  Null? cover;
+  String? cover;
   int? idJabatan;
   String? tempatLahir;
   String? tglLahir;

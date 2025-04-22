@@ -29,7 +29,7 @@ class PengajuanCutiController extends GetxController {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 537|vH3SB24MXsVvNgK5JxtoYS3ROBsCO8Ig89ZvVypz653d72ed',
+          'Authorization': 'Bearer 1|50ZUfaSdhuPbU1nHW8FPdKSjkIxV2NknN92PfMSk95e4acb8',
         },
       );
 

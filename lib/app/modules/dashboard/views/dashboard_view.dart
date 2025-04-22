@@ -23,11 +23,29 @@ class DashboardView extends GetView<DashboardController> {
           backgroundColor: Colors.indigo,
           actions: [
             IconButton(
-              icon: const Icon(Icons.notifications_none),
-              onPressed: () {},
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                // Aksi logout, misalnya menghapus token dan kembali ke halaman login
+                // Contoh jika menggunakan GetX:
+                Get.defaultDialog(
+                  title: "Konfirmasi",
+                  middleText: "Apakah kamu yakin ingin logout?",
+                  textCancel: "Batal",
+                  textConfirm: "Logout",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    // Hapus token atau session
+                    // Misalnya:
+                    // box.remove('token'); atau GetStorage().erase();
+                    // Setelah logout, arahkan ke halaman login
+                    Get.offAllNamed('/login');
+                  },
+                );
+              },
             ),
             const SizedBox(width: 10),
           ],
+
         ),
         drawer: Drawer(
           child: Column(
